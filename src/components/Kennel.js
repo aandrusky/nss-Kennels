@@ -1,16 +1,16 @@
 import React from "react"
 
-import { Animal } from "./animal/Animal"
-import "./animal/Animal.css"
+import { LocationList } from "./Locations/LocationList"
+import { LocationProvider } from "./Locations/LocationProvider"
 
-import { Employee } from "./Employees/Employees"
-import "./Employees/Employees.css"
+import { EmployeesList } from "./Employees/EmployeesList"
+import { EmployeesProvider } from "./Employees/EmployeesProvider"
 
-import { Location } from "./Locations/Locations"
-import "./Locations/Locations.css"
+import { AnimalList } from "./animal/AnimalList"
+import { AnimalProvider } from "./animal/AnimalProvider"
 
-import { Customer } from "./Customers/Customers"
-import "./Customers/Customers.css"
+import { CustomerList } from "./Customers/CustomerList"
+import { CustomerProvider } from "./Customers/CustomerProvider"
 
 import "./Kennel.css"
 
@@ -19,37 +19,24 @@ export const Kennel = () => (
         <h2>Nashville Kennels</h2>
         <small>Loving care when you're not there.</small>
 
-        <address>
-            <div>Visit Us at the Nashville North Location</div>
-            <div>500 Puppy Way</div>
-        </address>
-
-        <h2>Animals</h2>
-        <article className="animals">
-            <Animal />
-            <Animal />
-            <Animal />
-        </article>
+        <h2>Locations</h2>
+        <LocationProvider>
+            <LocationList />
+        </LocationProvider>
 
         <h2>Employees</h2>
-        <article className="employees">
-            <Employee />
-            <Employee />
-            <Employee />
-        </article>
+        <EmployeesProvider>
+            <EmployeesList />
+        </EmployeesProvider>
 
-        <h2>Locations</h2>
-        <article className="locations">
-            <Location />
-            <Location />
-        </article>
+        <h2>Animals</h2>
+        <AnimalProvider>
+            <AnimalList />
+        </AnimalProvider>
 
         <h2>Customers</h2>
-        <article className="customers">
-            <Customer />
-            <Customer />
-            <Customer />
-            <Customer />
-        </article>
+        <CustomerProvider>
+            <CustomerList />
+        </CustomerProvider>
     </>
 )
