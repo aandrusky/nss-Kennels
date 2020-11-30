@@ -17,7 +17,7 @@ export const EmployeesProvider = (props) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(location)
+            body: JSON.stringify(employee)
         })
             .then(getEmployees)
     }
