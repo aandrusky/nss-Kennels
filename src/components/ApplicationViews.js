@@ -8,6 +8,7 @@ import { LocationList } from "./Locations/LocationList"
 import { AnimalList } from "./animal/AnimalList"
 import { CustomerList } from "./Customers/CustomerList"
 import { EmployeesList } from "./Employees/EmployeesList"
+import { EmployeeForm } from "./Employees/EmployeeForm"
 
 export const ApplicationViews = (props) => {
     return (
@@ -19,6 +20,7 @@ export const ApplicationViews = (props) => {
                 </Route>
             </LocationProvider>
 
+
             <AnimalProvider>
                 <LocationProvider>
                     <CustomerProvider>
@@ -29,6 +31,7 @@ export const ApplicationViews = (props) => {
                 </LocationProvider>
             </AnimalProvider>
 
+
             <CustomerProvider>
                 {/* Render the animal list when http://localhost:3000/customers */}
                 <Route path="/customers">
@@ -36,12 +39,23 @@ export const ApplicationViews = (props) => {
                 </Route>
             </CustomerProvider>
 
-            <EmployeesProvider>
-                {/* Render the animal list when http://localhost:3000/employees */}
-                <Route path="/employees">
-                    <EmployeesList />
-                </Route>
-            </EmployeesProvider>
+
+            <AnimalProvider>
+                <LocationProvider>
+                    <EmployeesProvider>
+                        <Route exact path="/employees" render={
+                            props => {
+                                console.log("props from react router dom", props)
+                                return <EmployeesList {...props} />
+                                // <EmployeeList history={props.history} location={props.location} match={props.match} message="Hello C44" />
+                            }
+                        } />
+                        <Route path="/employees/create" render={
+                            props => <EmployeeForm {...props} />
+                        } />
+                    </EmployeesProvider>
+                </LocationProvider>
+            </AnimalProvider>
         </>
     )
 }

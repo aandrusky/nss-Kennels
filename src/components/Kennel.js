@@ -4,18 +4,18 @@ import { Route } from "react-router-dom"
 import { NavBar } from "./nav/NavBar"
 import { ApplicationViews } from "./ApplicationViews"
 
-import { LocationList } from "./Locations/LocationList"
-import { LocationProvider } from "./Locations/LocationProvider"
+// import { LocationList } from "./Locations/LocationList"
+// import { LocationProvider } from "./Locations/LocationProvider"
 
-import { EmployeesList } from "./Employees/EmployeesList"
-import { EmployeesProvider } from "./Employees/EmployeesProvider"
+// import { EmployeesList } from "./Employees/EmployeesList"
+// import { EmployeesProvider } from "./Employees/EmployeesProvider"
 
-import { Animal } from "./animal/Animal"
-import { AnimalList } from "./animal/AnimalList"
-import { AnimalProvider } from "./animal/AnimalProvider"
+// import { Animal } from "./animal/Animal"
+// import { AnimalList } from "./animal/AnimalList"
+// import { AnimalProvider } from "./animal/AnimalProvider"
 
-import { CustomerList } from "./Customers/CustomerList"
-import { CustomerProvider } from "./Customers/CustomerProvider"
+// import { CustomerList } from "./Customers/CustomerList"
+// import { CustomerProvider } from "./Customers/CustomerProvider"
 
 import "./Kennel.css"
 
