@@ -15,9 +15,7 @@ export const AnimalList = (props) => {
         getLocations()
             .then(getCustomers)
             .then(getAnimals)
-    },
-        []
-    )
+    },[])
 
 
     return (
@@ -27,9 +25,13 @@ export const AnimalList = (props) => {
                 Make Appointment
             </button>
             <article className="animalList">
-                {animals.map(animal => <Animal key={animal.id} animal={animal} />)}
-            </article>
+                {animals.map(animal => {
+                    const owner = customers.find((c) => c.id === animal.customerId);
+                    const clinic = locations.find((l) => l.id === animal.locationId);
+                return (<Animal key={animal.id} animal={animal} location={clinic} customer={owner} />
+                );
+                })}
+                  </article>
         </div>
-    )
-
+    );
 }

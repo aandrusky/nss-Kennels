@@ -1,20 +1,24 @@
 import React, { useContext, useRef, useEffect } from "react"
-import { EmployeeContext } from "./EmployeesProvider"
+// import { EmployeeContext } from "./EmployeesProvider"
 import { LocationContext } from "../Locations/LocationProvider"
 import { AnimalContext } from "../animal/AnimalProvider"
+import { CustomerContext } from "../Customers/CustomerProvider"
 import "./Animal.css"
 
 export const AnimalForm = (props) => {
-    const { addAnimal } = useContext(AnimalContext)
+    const { addAnimal, getAnimals } = useContext(AnimalContext)
     const { locations, getLocations } = useContext(LocationContext)
-    const { employee, getEmployees } = useContext(EmployeeContext)
+    const { customers, getCustomers } = useContext(CustomerContext)
+    // const { employee, getEmployees } = useContext(EmployeeContext)
 
     const name = useRef(null)
     const location = useRef(null)
-    const animal = useRef(null)
+    const customer = useRef(null)
+    const breed = useRef(null)
 
     useEffect(() => {
         getAnimals().then(getLocations)
+        .then(getCustomers)
      },
     [])
 
@@ -26,15 +30,16 @@ export const AnimalForm = (props) => {
             but rather `.current.value` now in React.
         */
         const locationId = parseInt(location.current.value)
-        const animalId = parseInt(animal.current.value)
+        const customerId = parseInt(customer.current.value)
 
         if (locationId === 0) {
             window.alert("Please select a location")
         } else {
             addAnimal({
-                name: name.current.value,
+                name: name.current.value, 
+                breed: breed.current.value,
                 locationId,
-                animalId
+                customerId
             })
             .then(() => props.history.push("/animals"))
         }
@@ -52,31 +57,38 @@ export const AnimalForm = (props) => {
 
             <fieldset>
                 <div className="form-group">
+                    <label htmlFor="animalBreed">Animal breed: </label>
+                    <input type="text" id="animalBreed" ref={breed} required autoFocus className="form-control" placeholder="Animal Breed" />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
                     <label htmlFor="location">Request location: </label>
                     <select defaultValue="" name="location" ref={location} id="animalLocation" className="form-control" >
                         <option value="0">Select a location</option>
-                        {locations.map(e => (
-                            <option key={e.id} value={e.id}>
-                                {e.name}
+                        {locations.map(l => (
+                            <option key={l.id} value={l.id}>
+                                {l.name}
                             </option>
                         ))}
                     </select>
                 </div>
             </fieldset>
 
-            <fieldset>
+             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="location">Caretaker for: </label>
-                    <select defaultValue="" name="animal" ref={animal} id="employeeAnimal" className="form-control" >
-                        <option value="0">Select an animal</option>
-                        {animals.map(e => (
-                            <option key={e.id} value={e.id}>
-                                {e.name}
+                    <label htmlFor="customer">Caretaker is: </label>
+                    <select defaultValue="" name="customer" ref={customer} id="customerAnimal" className="form-control" >
+                        <option value="0">Select a customer</option>
+                        {customers.map(c => (
+                            <option key={c.id} value={c.id}>
+                                {c.name}
                             </option>
                         ))}
                     </select>
                 </div>
-            </fieldset>
+            </fieldset> 
 
             <button type="submit"
                 onClick={evt => {

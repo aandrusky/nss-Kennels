@@ -21,7 +21,7 @@ export const ApplicationViews = (props) => {
                 </Route>
             </LocationProvider>
 
-            // animal appointment route
+            {/* // animal appointment route */}
             <AnimalProvider>
                 <LocationProvider>
                     <CustomerProvider>
@@ -49,7 +49,7 @@ export const ApplicationViews = (props) => {
             </CustomerProvider>
 
 
-            // add employee route
+            {/* // add employee route */}
             <AnimalProvider>
                 <LocationProvider>
                     <EmployeesProvider>
