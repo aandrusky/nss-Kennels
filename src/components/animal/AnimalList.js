@@ -15,7 +15,7 @@ export const AnimalList = (props) => {
         getLocations()
             .then(getCustomers)
             .then(getAnimals)
-    },[])
+    }, [])
 
 
     return (
@@ -28,10 +28,10 @@ export const AnimalList = (props) => {
                 {animals.map(animal => {
                     const owner = customers.find((c) => c.id === animal.customerId);
                     const clinic = locations.find((l) => l.id === animal.locationId);
-                return (<Animal key={animal.id} animal={animal} location={clinic} customer={owner} />
-                );
+/*  Why is this other return here->*/   return (<Animal key={animal.id} animal={animal} location={clinic} customer={owner} />
+                    );
                 })}
-                  </article>
+            </article>
         </div>
     );
 }

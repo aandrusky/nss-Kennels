@@ -26,15 +26,13 @@ export const ApplicationViews = (props) => {
                 <LocationProvider>
                     <CustomerProvider>
                         <EmployeesProvider>
-                            <Route exact path="/animals"> render={
+                            <Route exact path="/animals" render={
                                 props => <AnimalList {...props} />
                             } />
 
                         <Route exact path="/animals/create" render={
                                     props => <AnimalForm {...props} />
                                 } />
-                                <AnimalList />
-                            </Route>
                         </EmployeesProvider>
                     </CustomerProvider>
                 </LocationProvider>
