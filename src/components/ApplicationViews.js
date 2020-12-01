@@ -9,6 +9,7 @@ import { AnimalList } from "./animal/AnimalList"
 import { CustomerList } from "./Customers/CustomerList"
 import { EmployeesList } from "./Employees/EmployeesList"
 import { EmployeeForm } from "./Employees/EmployeeForm"
+import { AnimalForm } from "./animal/AnimalForm"
 
 export const ApplicationViews = (props) => {
     return (
@@ -20,13 +21,21 @@ export const ApplicationViews = (props) => {
                 </Route>
             </LocationProvider>
 
-
+            // animal appointment route
             <AnimalProvider>
                 <LocationProvider>
                     <CustomerProvider>
-                        <Route exact path="/animals">
-                            <AnimalList />
-                        </Route>
+                        <EmployeesProvider>
+                            <Route exact path="/animals"> render={
+                                props => <AnimalList {...props} />
+                            } />
+
+                        <Route exact path="/animals/create" render={
+                                    props => <AnimalForm {...props} />
+                                } />
+                                <AnimalList />
+                            </Route>
+                        </EmployeesProvider>
                     </CustomerProvider>
                 </LocationProvider>
             </AnimalProvider>
@@ -40,6 +49,7 @@ export const ApplicationViews = (props) => {
             </CustomerProvider>
 
 
+            // add employee route
             <AnimalProvider>
                 <LocationProvider>
                     <EmployeesProvider>
