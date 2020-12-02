@@ -9,9 +9,10 @@ import { AnimalList } from "./animal/AnimalList"
 import { CustomerList } from "./Customers/CustomerList"
 import { EmployeesList } from "./Employees/EmployeesList"
 import { EmployeeForm } from "./Employees/EmployeeForm"
-import { AnimalForm } from "./animal/AnimalForm"
+// import { AnimalForm } from "./animal/AnimalForm"
 import { EmployeeDetail } from "./Employees/EmployeeDetail"
 import { LocationDetail } from "./Locations/LocationDetail"
+import { AnimalDetails } from "./animal/AnimalDetail"
 
 export const ApplicationViews = (props) => {
     return (
@@ -25,7 +26,6 @@ export const ApplicationViews = (props) => {
                         </Route>
                         <Route path="/locations/:locationId(\d+)" render={
                             props => {
-                                console.log("props", props)
                                 return <LocationDetail {...props} />
                             }
                         } />
@@ -44,27 +44,30 @@ export const ApplicationViews = (props) => {
                         <Route path="/employees/:employeeId(\d+)" render={
                             props => <EmployeeDetail {...props} />
                         } />
+                        <Route exact path="/employees" render={
+                            props => {
+                                console.log("props from react router dom", props)
+                                return <EmployeesList {...props} />
+                                // <EmployeeList history={props.history} location={props.location} match={props.match} message="Hello C44" />
+                            }
+                        } />
                     </AnimalProvider>
                 </LocationProvider>
             </EmployeesProvider>
 
-            {/* // animal appointment route */}
             <AnimalProvider>
                 <LocationProvider>
                     <CustomerProvider>
-                        <EmployeesProvider>
-                            <Route exact path="/animals" render={
-                                props => <AnimalList {...props} />
-                            } />
-
-                            <Route exact path="/animals/create" render={
-                                props => <AnimalForm {...props} />
-                            } />
-                        </EmployeesProvider>
+                        {/* Render the animal list when http://localhost:3000/animals */}
+                        <Route exact path="/animals">
+                            <AnimalList />
+                        </Route>
+                        <Route path="/animals/:animalId(\d+)" render={
+                            props => <AnimalDetails {...props} />
+                        } />
                     </CustomerProvider>
                 </LocationProvider>
             </AnimalProvider>
-
 
             <CustomerProvider>
                 {/* Render the animal list when http://localhost:3000/customers */}
@@ -74,23 +77,9 @@ export const ApplicationViews = (props) => {
             </CustomerProvider>
 
 
-            {/* // add employee route */}
-            <AnimalProvider>
-                <LocationProvider>
-                    <EmployeesProvider>
-                        <Route exact path="/employees" render={
-                            props => {
-                                console.log("props from react router dom", props)
-                                return <EmployeesList {...props} />
-                                // <EmployeeList history={props.history} location={props.location} match={props.match} message="Hello C44" />
-                            }
-                        } />
-                        <Route path="/employees/create" render={
-                            props => <EmployeeForm {...props} />
-                        } />
-                    </EmployeesProvider>
-                </LocationProvider>
-            </AnimalProvider>
+         
         </>
+
+
     )
 }
