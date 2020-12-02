@@ -9,10 +9,11 @@ import { AnimalList } from "./animal/AnimalList"
 import { CustomerList } from "./Customers/CustomerList"
 import { EmployeesList } from "./Employees/EmployeesList"
 import { EmployeeForm } from "./Employees/EmployeeForm"
-// import { AnimalForm } from "./animal/AnimalForm"
+import { AnimalForm } from "./animal/AnimalForm"
 import { EmployeeDetail } from "./Employees/EmployeeDetail"
 import { LocationDetail } from "./Locations/LocationDetail"
 import { AnimalDetails } from "./animal/AnimalDetail"
+import { Home } from "./Locations/Home"
 
 export const ApplicationViews = (props) => {
     return (
@@ -23,6 +24,9 @@ export const ApplicationViews = (props) => {
                         {/* Render the location list when http://localhost:3000/ */}
                         <Route exact path="/">
                             <LocationList />
+                        </Route>
+                        <Route exact path="/home">
+                            { <Home />  /*<--Home doesn't need props. so no "render=..." b/c there is no need for props on this page */}
                         </Route>
                         <Route path="/locations/:locationId(\d+)" render={
                             props => {
@@ -59,9 +63,12 @@ export const ApplicationViews = (props) => {
                 <LocationProvider>
                     <CustomerProvider>
                         {/* Render the animal list when http://localhost:3000/animals */}
-                        <Route exact path="/animals">
-                            <AnimalList />
-                        </Route>
+                        <Route exact path="/animals" render={
+                            props => <AnimalList {...props} />
+                        } />
+                        <Route exact path="/animals/create" render={
+                            props => <AnimalForm {...props} />
+                        } />
                         <Route path="/animals/:animalId(\d+)" render={
                             props => <AnimalDetails {...props} />
                         } />
@@ -77,7 +84,7 @@ export const ApplicationViews = (props) => {
             </CustomerProvider>
 
 
-         
+
         </>
 
 

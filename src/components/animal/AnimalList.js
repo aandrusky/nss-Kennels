@@ -3,7 +3,7 @@ import { AnimalContext } from "./AnimalProvider"
 import Animal from "./Animal"
 import "./Animal.css"
 
-export const AnimalList = ({ history }) => {
+export const AnimalList = ({history}) => {
     const { getAnimals, animals } = useContext(AnimalContext)
 
     // Initialization effect hook -> Go get animal data
