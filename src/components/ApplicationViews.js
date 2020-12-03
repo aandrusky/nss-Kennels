@@ -14,6 +14,7 @@ import { EmployeeDetail } from "./Employees/EmployeeDetail"
 import { LocationDetail } from "./Locations/LocationDetail"
 import { AnimalDetails } from "./animal/AnimalDetail"
 import { Home } from "./Locations/Home"
+import { AnimalSearch } from "./animal/AnimalSearch"
 
 export const ApplicationViews = (props) => {
     return (
@@ -26,7 +27,7 @@ export const ApplicationViews = (props) => {
                             <LocationList />
                         </Route>
                         <Route exact path="/home">
-                            { <Home />  /*<--Home doesn't need props. so no "render=..." b/c there is no need for props on this page */}
+                            {<Home />  /*<--Home doesn't need props. so no "render=..." b/c there is no need for props on this page */}
                         </Route>
                         <Route path="/locations/:locationId(\d+)" render={
                             props => {
@@ -64,24 +65,31 @@ export const ApplicationViews = (props) => {
                     <CustomerProvider>
                         {/* Render the animal list when http://localhost:3000/animals */}
                         <Route exact path="/animals" render={
-                            props => <AnimalList {...props} />
+                            props => <>
+                                <AnimalSearch />
+                                <AnimalList {...props} />
+                            </>
                         } />
                         <Route exact path="/animals/create" render={
+                            props => <AnimalForm {...props} />
+                        } />
+                        <Route path="/animals/edit/:animalId(\d+)" render={
                             props => <AnimalForm {...props} />
                         } />
                         <Route path="/animals/:animalId(\d+)" render={
                             props => <AnimalDetails {...props} />
                         } />
+                        
                     </CustomerProvider>
                 </LocationProvider>
             </AnimalProvider>
 
-            <CustomerProvider>
-                {/* Render the animal list when http://localhost:3000/customers */}
-                <Route path="/customers">
-                    <CustomerList />
-                </Route>
-            </CustomerProvider>
+                <CustomerProvider>
+                    {/* Render the animal list when http://localhost:3000/customers */}
+                    <Route path="/customers">
+                        <CustomerList />
+                    </Route>
+                </CustomerProvider>
 
 
 
